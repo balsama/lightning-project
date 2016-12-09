@@ -71,7 +71,7 @@ install:
   - cd ../../../../
 
 
-script: {}
+script:
   - git diff composer.json
 
 matrix:
