@@ -65,39 +65,14 @@ install:
   # Build the Lightning code base.
   - composer install
 
-  # Install Lightning.
-  - cd docroot
-  - drush site-install lightning --yes --account-pass=admin --db-url=mysql://lightning:lightning@127.0.0.1/drupal
-  - drush pm-enable lightning_preview --yes
-  - drush config-set system.logging error_level all --yes
-
   # Run the build upgrade script to switch packagists.
-  - cd profiles/contrib/lightning
+  - cd docroot/profiles/contrib/lightning
   - composer run upgrade-build
   - cd ../../../../
-  - composer require acquia/lightning:dev-8.x-2.x --no-update
-  - composer update
-  - cd docroot
-  - drush updatedb -y
 
-before_script:
-  - drush runserver --default-server=builtin 8080 &>/dev/null &
-  # Start Selenium and dump its ginormous log into a temporary file.
-  - jdk_switcher use oraclejdk8
-  - mkdir tmp
-  - selenium-server-standalone -port 4444 -log tmp/selenium2.log &
-  - sleep 5
-  - cd ..
 
-  # Copy Behat configuration from Lightning.
-  - cp ./docroot/profiles/contrib/lightning/behat.* .
-  - "sed -i -e 's/selenium2: ~/selenium2: { browser: chrome }/g' behat.yml"
-  - sed -i -e 's/%paths.base%\/tests\/features/docroot\/profiles\/contrib\/lightning\/tests\/features/g' behat.yml
-  - sed -i -e 's/tests\/features\/bootstrap/docroot\/profiles\/contrib\/lightning\/tests\/features\/bootstrap/g' behat.yml
-  - sed -i -e "s/ '..\/..\/'/ 'docroot'/g" behat.local.yml
-
-script:
-  - bin/behat --strict --stop-on-failure
+script: {}
+  - git diff composer.json
 
 matrix:
   fast_finish: true
