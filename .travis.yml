@@ -50,15 +50,6 @@ install:
   # our installed versions of Drush, PHPCS, Behat, PhantomJS, etc.
   - export PATH="$HOME/.composer/vendor/bin:$TRAVIS_BUILD_DIR/bin:$PATH"
 
-  # Create the MySQL database and add a user for testing.
-  - mysql -u root -e "CREATE DATABASE drupal; CREATE USER 'lightning'@'localhost' IDENTIFIED BY 'lightning'; GRANT ALL ON drupal.* TO 'lightning'@'localhost';"
-
-  # PHP conf tweaks
-  - echo 'max_execution_time = 120' >> drupal.php.ini;
-  - echo 'sendmail_path = /bin/true' >> drupal.php.ini;
-  - phpenv config-add drupal.php.ini
-  - phpenv rehash
-
   # Install drush
   - composer require drush/drush:^8.0 --no-update
 
@@ -69,10 +60,11 @@ install:
   - cd docroot/profiles/contrib/lightning
   - composer run upgrade-build
   - cd ../../../../
+  - git diff composer.json diff.diff
 
 
 script:
-  - git diff composer.json
+  - cat diff.diff
 
 matrix:
   fast_finish: true
