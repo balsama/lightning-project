@@ -12,10 +12,6 @@ cache:
 php:
   - 5.6
 
-env:
-  - VERSION=STABLE
-  - VERSION=HEAD
-
 addons:
   apt:
     packages:
@@ -75,13 +71,14 @@ install:
   - drush pm-enable lightning_preview --yes
   - drush config-set system.logging error_level all --yes
 
-  # Update codebase to head and run db updates.
-  - if [ $VERSION = "HEAD" ]; then cd ..; fi;
-  - if [ $VERSION = "HEAD" ]; then rm -rf docroot/modules/contrib; fi;
-  - if [ $VERSION = "HEAD" ]; then composer require acquia/lightning:dev-8.x-2.x --no-update; fi;
-  - if [ $VERSION = "HEAD" ]; then composer update; fi;
-  - if [ $VERSION = "HEAD" ]; then cd docroot; fi;
-  - if [ $VERSION = "HEAD" ]; then drush updatedb -y; fi;
+  # Run the build upgrade script to switch packagists.
+  - cd profiles/contrib/lightning
+  - composer run upgrade-build
+  - cd ../../../../
+  - composer require acquia/lightning:dev-8.x-2.x --no-update
+  - composer update
+  - cd docroot
+  - drush updatedb -y
 
 before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
