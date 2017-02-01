@@ -62,11 +62,11 @@ install:
   # Install drush
   - composer require drush/drush:^8.0 --no-update
 
-  # Since beta1 didn't have composer support, we can use a quirk of the packagist to get dependencies
-  - composer suggests | xargs -I '{}' composer require '{}'
-
   # Build the Lightning code base.
   - composer install
+  
+  # Since beta1 didn't have composer support, we can use a quirk of the packagist to get dependencies
+  - composer suggests | xargs -I '{}' composer require '{}'
 
   # Install Lightning.
   - cd docroot
