@@ -64,8 +64,9 @@ install:
 
   # Build the Lightning code base.
   - composer install
-  
-  # Since beta1 didn't have composer support, we can use a quirk of the packagist to get dependencies
+
+  # Since beta1 didn't have composer support, we can use a quirk of the  old
+  # packagist to get dependencies
   - composer suggests | xargs -I '{}' composer require '{}'
 
   # Install Lightning.
@@ -77,9 +78,6 @@ install:
   - cd docroot/profiles/contrib/lightning
   - composer run upgrade-build
   - cd ../../../../
-
-  # Update to 2.x
-  - composer update
 
   # Make sure we have 2.0.3
   - composer require acquia/lightning:2.0.3 --no-update
