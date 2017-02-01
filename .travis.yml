@@ -63,27 +63,35 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
-  # Install drush
-  - composer require drush/drush:^8.0 --no-update
-  - composer require drupal/devel --no-update
-
   # Build the Lightning code base.
   - composer install
 
   # Install Lightning.
   - cd docroot
   - drush site-install lightning --yes --account-pass=admin --db-url=mysql://lightning:lightning@127.0.0.1/drupal
+
+  # Update to 8.x-1.15, which has the packagist update script
+  - composer require drupal/lightning:8.x-1.15
+  - cd docroot/profiles/contrib/lightning
+  - composer run upgrade-build
+  - cd ../../../../
+
+  # Update to 2.x
+  - composer update
+
+  # Make sure we have 2.0.3
+  - composer require acquia/lightning:2.0.3 --no-update
+
+  # Install drush
+  - composer require drush/drush:^8.0 --no-update
+  - composer require drupal/devel --no-update
+  - composer update
+
+  - cd docroot
+  - drush updatedb -y
+  - drush pm-enable lightning_dev --yes
   - drush pm-enable lightning_preview --yes
   - drush config-set system.logging error_level all --yes
-
-  # Update codebase to head and run db updates.
-  - if [ $VERSION = "HEAD" ]; then cd ..; fi;
-  - if [ $VERSION = "HEAD" ]; then rm -rf docroot/modules/contrib; fi;
-  - if [ $VERSION = "HEAD" ]; then composer require acquia/lightning:dev-8.x-2.x --no-update; fi;
-  - if [ $VERSION = "HEAD" ]; then composer update; fi;
-  - if [ $VERSION = "HEAD" ]; then cd docroot; fi;
-  - if [ $VERSION = "HEAD" ]; then drush pm-enable lightning_dev --yes; fi;
-  - if [ $VERSION = "HEAD" ]; then drush updatedb -y; fi;
 
 before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
