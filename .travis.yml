@@ -12,10 +12,6 @@ cache:
 php:
   - 7.0
 
-env:
-  - VERSION=STABLE
-  - VERSION=HEAD
-
 addons:
   apt:
     packages:
