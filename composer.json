@@ -22,7 +22,7 @@
         "composer/installers": "^1.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "cweagans/composer-patches": "^1.6.0",
-        "drupal/lightning": "dev-8.x-1.x#404b135086821536237efc4d72bc01037cc659fc"
+        "drupal/lightning": "8.1.0-beta1"
     },
     "repositories": [
         {
