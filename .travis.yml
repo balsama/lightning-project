@@ -59,6 +59,12 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
+  # Install drush
+  - composer require drush/drush:^8.0 --no-update
+
+  # Since beta1 didn't have composer support, we can use a quirk of the packagist to get dependencies
+  - composer suggests | xargs -i composer require {}
+
   # Build the Lightning code base.
   - composer install
 
@@ -77,9 +83,6 @@ install:
 
   # Make sure we have 2.0.3
   - composer require acquia/lightning:2.0.3 --no-update
-
-  # Install drush
-  - composer require drush/drush:^8.0 --no-update
   - composer require drupal/devel --no-update
   - composer update
 
