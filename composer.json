@@ -22,7 +22,7 @@
     "require": {
         "composer/installers": "^1.0",
         "drupal-composer/drupal-scaffold": "^2.0.0 || ^1.0.0",
-        "cweagans/composer-patches": "^1.6.0",
+        "cweagans/composer-patches": "^1.0.0",
         "drupal/lightning": "8.1.0-beta1",
         "drupal/entity_embed": "^8.1@beta",
         "drupal/media_entity": "^8.1",
