@@ -71,6 +71,14 @@ install:
   - cd ../
 
   # Update to RC1 which adds lightning_core
+  - composer remove drupal/entity_embed --no-update
+  - composer remove drupal/media_entity --no-update
+  - composer remove drupal/media_entity_embeddable_video --no-update
+  - composer remove drupal/media_entity_image --no-update
+  - composer remove drupal/media_entity_instagram --no-update
+  - composer remove drupal/media_entity_twitter --no-update
+  - composer remove drupal/page_manager --no-update
+  - composer remove drupal/panels --no-update
   - composer require drupal/lightning:8.1.0-rc1 --no-update
   - composer update
   - cd docroot
