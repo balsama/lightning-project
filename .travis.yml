@@ -70,7 +70,7 @@ install:
   - drush site-install lightning --yes --account-pass=admin --db-url=mysql://lightning:lightning@127.0.0.1/drupal
 
   # Update to 8.x-1.15, which has the packagist update script
-  - composer require drupal/lightning:8.x-1.15
+  - composer require drupal/lightning:8.1.15
   - cd docroot/profiles/contrib/lightning
   - composer run upgrade-build
   - cd ../../../../
