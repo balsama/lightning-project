@@ -59,10 +59,7 @@ install:
   - phpenv config-add drupal.php.ini
   - phpenv rehash
 
-  # Install drush
-  - composer require drush/drush:^8.0 --no-update
-
-  # Build the Lightning code base.
+  # Build the code base.
   - composer install
 
   # Install Lightning.
