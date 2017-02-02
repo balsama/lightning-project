@@ -71,7 +71,8 @@ install:
   - cd ../
 
   # Update to RC1 which adds lightning_core
-  - composer require drupal/lightning:8.1.0-rc1
+  - composer require drupal/lightning:8.1.0-rc1 --no-update
+  - composer update
   - cd docroot
   - drush updatedb -y
   - cd ../
