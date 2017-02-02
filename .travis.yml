@@ -72,7 +72,9 @@ install:
 
   # Update to 8.x-1.15, which has the packagist update script
   - composer require drupal/lightning:8.1.15
+  - cd docroot
   - drush pm-enable --yes lightning_workflow lightning_preview
+  - cd ../
   - cd docroot/profiles/contrib/lightning
   - composer run upgrade-build
   - cd ../../../
