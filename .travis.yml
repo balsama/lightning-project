@@ -74,7 +74,9 @@ install:
   - composer require drupal/lightning:8.1.15
   - cd docroot/profiles/contrib/lightning
   - composer run upgrade-build
-  - cd ../../../../
+  - cd ../../../
+  - drush updatedb -y
+  - cd ../
 
   # Make sure we have 2.0.3
   - composer require acquia/lightning:2.0.3 --no-update
