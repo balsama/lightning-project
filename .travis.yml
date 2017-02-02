@@ -79,12 +79,14 @@ install:
   # Make sure we have 2.0.3
   - composer require acquia/lightning:2.0.3 --no-update
   - composer require drupal/devel --no-update
+  - composer require drupal/features --no-update
   - composer update
 
   - cd docroot
-  - drush updatedb -y
+  - drush pm-enable features --yes
   - drush pm-enable lightning_dev --yes
   - drush pm-enable lightning_preview --yes
+  - drush updatedb -y
   - drush config-set system.logging error_level all --yes
 
 before_script:
