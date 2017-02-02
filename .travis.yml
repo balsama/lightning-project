@@ -65,10 +65,6 @@ install:
   # Build the Lightning code base.
   - composer install
 
-  # Since beta1 didn't have composer support, we can use a quirk of the  old
-  # packagist to get dependencies
-  - composer suggests | xargs -I '{}' composer require '{}'
-
   # Install Lightning.
   - cd docroot
   - drush site-install lightning --yes --account-pass=admin --db-url=mysql://lightning:lightning@127.0.0.1/drupal
@@ -104,7 +100,7 @@ before_script:
   - composer run prepare-behat
 
 script:
-  - bin/behat --strict --stop-on-failure
+  - bin/behat --strict
 
 matrix:
   fast_finish: true
