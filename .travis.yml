@@ -14,8 +14,8 @@ php:
 
 env:
   - VERSION=LIGHTNING TEST_TAGS=lightning PROFILE_NAME=lightning STABILITY='--prefer-stable'
-  - VERSION=LIGHTNING_LOWEST TEST_TAGS=lightning PROFILE_NAME=lightning STABILITY='--prefer-stable'
-  - VERSION=SUBPROFILE TEST_TAGS=~search PROFILE_NAME=subprofile STABILITY='--prefer-stable --prefer-lowest'
+  - VERSION=LIGHTNING_LOWEST TEST_TAGS=lightning PROFILE_NAME=lightning STABILITY='--prefer-stable --prefer-lowest'
+  - VERSION=SUBPROFILE TEST_TAGS=~search PROFILE_NAME=subprofile STABILITY='--prefer-stable'
 
 addons:
   apt:
